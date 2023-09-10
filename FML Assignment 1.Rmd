@@ -1,0 +1,45 @@
+---
+title: "FML Assignment 1"
+output: html_document
+date: "2023-09-09"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+#(1)
+#This dataset is downloded from "Kaggle" site
+#https://www.kaggle.com/datasets/rajugc/imdb-top-250-movies-dataset
+
+#(2) Importing dataset
+data <- read_csv("/Users/akhilchintu/Downloads/IMDB Top 250 Movies.csv")
+data
+spec(data)
+
+#(3) Descriptive statistics for quantitative variables:
+
+summary(data[,-c(2,5:13)])
+
+#(3) Descriptive statistics for qualitative variables:
+
+summary(data[,-c(1,3,4)])
+
+#(4) Transform one variable:
+data <- data %>% mutate(rating = rating / 2)
+print(data$rating)
+
+#(5) Plotting of quantitative variable:
+
+barplot(table(data$rating), 
+        main = "Distribution of Ratings",
+        xlab = "Rating",
+        ylab = "Frequency")
+
+#(5) Scatter plot 
+
+plot(data$rating,data$year ,main = "Scatter Plot of Year vs Rating",
+       xlab = "Rating",
+       ylab = "Year")
